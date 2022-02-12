@@ -2,7 +2,7 @@ package Api_Tests;
 
 import static io.restassured.RestAssured.*;
 
-import com.sun.org.glassfish.gmbal.Description;
+
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -22,6 +22,8 @@ public class JsonBin_Flow extends TestBase{
 
     @Test (priority = 1)
     public void createJson1(){
+
+            extentLogger = reports.createTest("Create with Pojo");
 
              response = given().accept(ContentType.JSON)
                                     .and().contentType(ContentType.JSON)
@@ -45,6 +47,8 @@ public class JsonBin_Flow extends TestBase{
     @Test(priority = 2)
     public void createJson2(){
 
+        extentLogger = reports.createTest("Create with Map");
+
                 response = given().accept(ContentType.JSON)
                                     .and().contentType(ContentType.JSON)
                                     .header("X-Master-Key", ConfigurationReaders.get("key"))
@@ -67,6 +71,9 @@ public class JsonBin_Flow extends TestBase{
 
     @Test(priority = 3)
     public void updateJson(){
+
+        extentLogger = reports.createTest("Update with Pojo");
+
         System.out.println("id_pojo = " + id_pojo);
         try{
             response = given().accept(ContentType.JSON)
@@ -90,6 +97,8 @@ public class JsonBin_Flow extends TestBase{
     @Test(priority = 4)
     public void getJson(){
 
+        extentLogger = reports.createTest("Get");
+
         response = given().accept(ContentType.JSON)
                 .and().pathParam("id", id_pojo)
                 .and().header("X-Master-Key", ConfigurationReaders.get("key"))
@@ -103,6 +112,8 @@ public class JsonBin_Flow extends TestBase{
     }
     @Test(priority = 5)
     public void deleteJson(){
+
+        extentLogger = reports.createTest("Delete");
 
                 given().pathParam("id", id_pojo)
                         .and().header("X-Master-Key", ConfigurationReaders.get("key"))
